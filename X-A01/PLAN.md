@@ -32,17 +32,18 @@
 ### 3.1 被测站
 
 - URL：https://exam.1mpower.com/
+- 任务领取入口（非被测站）：https://examguru-test-hub.stillbard22.chatgpt.site，用于领取/查看 X-A01 与读取官方 schema；直连可能被 Cloudflare 403，需用浏览器上下文访问。
 - 非隔离性来源：用户 2026-11-26 明确回答“非隔离环境”；工作台 X-A01 任务卡写的是“隔离测试环境 / 浏览器与接口自动化”，两者冲突。
 - 预检记录判定依据：站点是否只有测试账号、是否有真实班级/学生数据、是否有站点所有者说明。
 - 在隔离性证据取得前，`environment` 写 `exam.1mpower.com（测试环境，隔离性待核实）`，不直接断言“非隔离”。
 - 不做压测、fuzz、越权扫描；只做最小写操作。
-- 所有测试账号均来自 [UsableAccounts.md](../UsableAccounts.md)，不接触其他账号。
+- 所有测试账号均来自本机 `.secrets/accounts.local.json`，不接触其他账号。
 
 ### 3.2 账号库
 
 所有测试任务共用一套账号，统一放在仓库根目录 `.secrets/accounts.local.json`，并加入 `.gitignore`。
 
-文件结构（只示意键；实际用户名/密码从 [UsableAccounts.md](../UsableAccounts.md) 抄入本机文件，不写入脚本、计划、报告或证据）：
+文件结构（只示意键；实际用户名/密码只存在于本机 `.secrets/accounts.local.json`，不写入脚本、计划、报告或证据）：
 
 ```json
 {
@@ -59,7 +60,7 @@
 每个账号包含 `displayName`、`username`、`password`、`expectedRole`；脚本按账号键读取，`displayName` 仅用于报告。
 
 - 脚本只接收账号键（如 `student.primary`），不接收明文密码。
-- `UsableAccounts.md` 保留为人类可读索引；按 Q2 的选择，保留明文密码，但已加入 `.gitignore`，不提交。实际密码同时抄入本机 `.secrets/accounts.local.json`，供脚本读取。
+- `UsableAccounts.md` 已删除；账号的唯一来源是本机 `.secrets/accounts.local.json`，供脚本读取。`.gitignore` 仍保留 `UsableAccounts.md` 条目，防止以后误建同名明文文件。
 - `.gitignore` 已创建，包含：
 
 ```gitignore
@@ -76,7 +77,7 @@ node_modules/
 ```
 
 - 为什么用 JSON 而不是 `.env`：账号需要角色、备注和多账号映射，JSON 的结构更稳定；所有任务的脚本共用同一套账号键。
-- 为什么不在脚本里解析 `UsableAccounts.md`：Markdown 表格解析脆弱，且会把密码带进更多处理链路。`UsableAccounts.md` 只做人类索引。
+- 为什么账号只放在 JSON：Markdown 表格解析脆弱，且会把密码带进更多处理链路；JSON 结构更稳定，也便于脚本按账号键读取。
 
 ### 3.3 账号分配
 

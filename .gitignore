@@ -1,0 +1,19 @@
+# Local test credentials and evidence
+.secrets/
+*.local.json
+UsableAccounts.md
+X-A01/evidence/
+
+# Raw capture files that may contain tokens/PII
+*.har
+*.trace.zip
+
+# Local exploration/tooling directories (keep .scratch/x-a01 issue indexes)
+.scratch/pw/
+.scratch/fetch/
+
+# Local test tooling dependencies
+node_modules/
+
+# Local Claude settings that may contain private data
+.claude/settings.local.json

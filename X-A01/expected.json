@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "taskId": "X-A01",
+  "runId": "",
+  "expectedRevision": 1,
+  "environment": "",
+  "build": "",
+  "startedAt": "",
+  "finishedAt": "",
+  "measurementScope": "functional",
+  "metrics": {},
+  "caseResults": [
+    {
+      "caseId": "X-A01-01",
+      "status": "pending",
+      "note": "待填写真实执行结果。"
+    },
+    {
+      "caseId": "X-A01-02",
+      "status": "pending",
+      "note": "待填写真实执行结果。"
+    },
+    {
+      "caseId": "X-A01-03",
+      "status": "pending",
+      "note": "待填写真实执行结果。"
+    }
+  ],
+  "notes": "",
+  "thresholds": [],
+  "artifacts": []
+}
